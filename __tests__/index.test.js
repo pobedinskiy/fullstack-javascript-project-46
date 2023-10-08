@@ -12,6 +12,12 @@ const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8'
 
 test('jsonDiff', () => {
   const result = genDiff(getFixturePath('file1.json'), getFixturePath('file2.json'));
-  const expectedResult = readFile('json_files.txt');
+  const expectedResult = readFile('filesDiff.txt');
+  expect(result).toEqual(expectedResult);
+});
+
+test('ymlDiff', () => {
+  const result = genDiff(getFixturePath('file1.yml'), getFixturePath('file2.yml'));
+  const expectedResult = readFile('filesDiff.txt');
   expect(result).toEqual(expectedResult);
 });

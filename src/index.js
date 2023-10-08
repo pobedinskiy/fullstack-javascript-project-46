@@ -2,7 +2,7 @@ import process from 'process';
 import _ from 'lodash';
 import fs from 'fs';
 import path from 'path';
-import parse from './parsing.js';
+import parse from './parsers.js';
 
 const getData = (filepath) => {
   const ext = path.extname(filepath).split('.')[1];
