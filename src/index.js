@@ -3,6 +3,7 @@ import _ from 'lodash';
 import fs from 'fs';
 import path from 'path';
 import parse from './parsers.js';
+import stylish from './stylish.js';
 
 const getData = (filepath) => {
   const ext = path.extname(filepath).split('.')[1];
@@ -13,14 +14,16 @@ const getData = (filepath) => {
   return parsedData;
 };
 
-const createTree = (filepath1, filepath2) => {
-  const obj1 = getData(filepath1);
-  const obj2 = getData(filepath2);
-  const keysOfObj1 = _.keys(obj1);
-  const keysOfObj2 = _.keys(obj2);
-  const uniqKeysList = _.uniq([...keysOfObj1, ...keysOfObj2]);
+const createTree = (obj1, obj2) => {
+  const uniqKeysList = _.uniq([..._.keys(obj1), ..._.keys(obj2)]);
   const sortedKeysList = uniqKeysList.sort();
   const newTree = sortedKeysList.map((key) => {
+    if (_.isPlainObject(obj1[key]) && _.isPlainObject(obj2[key])) {
+      const children = createTree(obj1[key], obj2[key]);
+      return {
+        key, value: children, name: 'nested',
+      };
+    }
     if (!_.has(obj1, key)) {
       return {
         key, value: obj2[key], name: 'added',
@@ -42,21 +45,8 @@ const createTree = (filepath1, filepath2) => {
 };
 
 const genDiff = (filepath1, filepath2) => {
-  const tree = createTree(filepath1, filepath2);
-  const nodes = tree.map((node) => {
-    switch (node.name) {
-      case 'added':
-        return `  + ${node.key}: ${node.value}`;
-      case 'deleted':
-        return `  - ${node.key}: ${node.value}`;
-      case 'changed':
-        return `  - ${node.key}: ${node.oldValue}\n  + ${node.key}: ${node.newValue}`;
-      default:
-        return `    ${node.key}: ${node.value}`;
-    }
-  });
-  const resultTree = `{\n${nodes.join('\n')}\n}`;
-  return resultTree;
+  const tree = createTree(getData(filepath1), getData(filepath2));
+  return stylish(tree);
 };
 
 export default genDiff;
