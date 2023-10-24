@@ -1,0 +1,40 @@
+import _ from 'lodash';
+
+const transform = (data) => {
+  if (_.isObject(data)) {
+    return '[complex value]';
+  }
+  if (data === null) {
+    return null;
+  }
+  if (_.isBoolean(data)) {
+    return `${data}`;
+  }
+  return `'${data}'`;
+};
+
+const plain = (tree) => {
+  const iter = (arr, acc) => {
+    const lines = arr
+      .filter((node) => node.name !== 'unchanged')
+      .map((node) => {
+        const newAcc = acc === '' ? `${node.key}` : `${acc}.${node.key}`;
+        switch (node.name) {
+          case 'nested':
+            return iter(node.value, newAcc);
+          case 'added':
+            return `Property '${newAcc}' was added with value: ${transform(node.value)}`;
+          case 'deleted':
+            return `Property '${newAcc}' was removed`;
+          case 'changed':
+            return `Property '${newAcc}' was updated. From ${transform(node.oldValue)} to ${transform(node.newValue)}`;
+          default:
+            return null;
+        }
+      });
+    return [...lines].join('\n');
+  };
+  return iter(tree, '');
+};
+
+export default plain;

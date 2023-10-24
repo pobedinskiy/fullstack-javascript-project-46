@@ -3,7 +3,7 @@ import _ from 'lodash';
 import fs from 'fs';
 import path from 'path';
 import parse from './parsers.js';
-import stylish from './stylish.js';
+import format from './formatters/index.js';
 
 const getData = (filepath) => {
   const ext = path.extname(filepath).split('.')[1];
@@ -44,9 +44,9 @@ const createTree = (obj1, obj2) => {
   return newTree;
 };
 
-const genDiff = (filepath1, filepath2) => {
+const genDiff = (filepath1, filepath2, formatName) => {
   const tree = createTree(getData(filepath1), getData(filepath2));
-  return stylish(tree);
+  return format(tree, formatName);
 };
 
 export default genDiff;
