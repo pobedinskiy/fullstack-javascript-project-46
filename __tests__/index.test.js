@@ -33,3 +33,15 @@ test('ymlPlainDiff', () => {
   const expectedResult = readFile('filesPlainDiff.txt');
   expect(result).toEqual(expectedResult);
 });
+
+test('jsonJsonDiff', () => {
+  const result = genDiff(getFixturePath('file1.json'), getFixturePath('file2.json'));
+  const expectedResult = readFile('filesJsonDiff.txt');
+  expect(result).toEqual(expectedResult);
+});
+
+test('ymlJsonDiff', () => {
+  const result = genDiff(getFixturePath('file1.yml'), getFixturePath('file2.yml'));
+  const expectedResult = readFile('filesJsonDiff.txt');
+  expect(result).toEqual(expectedResult);
+});

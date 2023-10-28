@@ -8,7 +8,7 @@ program
   .version('0.0.1', '-V, --VERSION', 'output the version number')
   .arguments('<filepath1> <filepath2>')
   .helpOption('-h, --help', 'output the version number')
-  .option('-f, --format <type>', 'output format(choices: stylish, plain)', 'stylish')
+  .option('-f, --format <type>', 'output format(choices: stylish, plain, json)', 'stylish')
   .action((filepath1, filepath2) => {
     const diff = genDiff(filepath1, filepath2, program.opts().format);
     console.log(diff);
