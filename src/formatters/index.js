@@ -11,7 +11,7 @@ const format = (tree, formatName) => {
     case 'json':
       return json(tree);
     default:
-      return `format ${formatName} is not supported`;
+      throw new Error(`format ${formatName} is not supported`);
   }
 };
 

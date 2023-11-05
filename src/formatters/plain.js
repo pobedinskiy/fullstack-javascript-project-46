@@ -18,16 +18,16 @@ const plain = (tree) => {
     const lines = arr
       .filter((node) => node.name !== 'unchanged')
       .map((node) => {
-        const newAcc = acc === '' ? `${node.key}` : `${acc}.${node.key}`;
+        const keyPath = acc === '' ? `${node.key}` : `${acc}.${node.key}`;
         switch (node.name) {
           case 'nested':
-            return iter(node.value, newAcc);
+            return iter(node.value, keyPath);
           case 'added':
-            return `Property '${newAcc}' was added with value: ${transform(node.value)}`;
+            return `Property '${keyPath}' was added with value: ${transform(node.value)}`;
           case 'deleted':
-            return `Property '${newAcc}' was removed`;
+            return `Property '${keyPath}' was removed`;
           case 'changed':
-            return `Property '${newAcc}' was updated. From ${transform(node.oldValue)} to ${transform(node.newValue)}`;
+            return `Property '${keyPath}' was updated. From ${transform(node.oldValue)} to ${transform(node.newValue)}`;
           default:
             return null;
         }

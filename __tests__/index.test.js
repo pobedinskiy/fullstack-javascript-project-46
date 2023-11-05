@@ -10,38 +10,13 @@ const __dirname = dirname(__filename);
 const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
 const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8');
 
-test('jsonStylishDiff', () => {
-  const result = genDiff(getFixturePath('file1.json'), getFixturePath('file2.json'));
-  const expectedResult = readFile('filesDiff.txt');
-  expect(result).toEqual(expectedResult);
-});
+const extensions = ['yml', 'json'];
 
-test('ymlStylishDiff', () => {
-  const result = genDiff(getFixturePath('file1.yml'), getFixturePath('file2.yml'));
-  const expectedResult = readFile('filesDiff.txt');
-  expect(result).toEqual(expectedResult);
-});
-
-test('jsonPlainDiff', () => {
-  const result = genDiff(getFixturePath('file1.json'), getFixturePath('file2.json'));
-  const expectedResult = readFile('filesPlainDiff.txt');
-  expect(result).toEqual(expectedResult);
-});
-
-test('ymlPlainDiff', () => {
-  const result = genDiff(getFixturePath('file1.yml'), getFixturePath('file2.yml'));
-  const expectedResult = readFile('filesPlainDiff.txt');
-  expect(result).toEqual(expectedResult);
-});
-
-test('jsonJsonDiff', () => {
-  const result = genDiff(getFixturePath('file1.json'), getFixturePath('file2.json'));
-  const expectedResult = readFile('filesJsonDiff.txt');
-  expect(result).toEqual(expectedResult);
-});
-
-test('ymlJsonDiff', () => {
-  const result = genDiff(getFixturePath('file1.yml'), getFixturePath('file2.yml'));
-  const expectedResult = readFile('filesJsonDiff.txt');
-  expect(result).toEqual(expectedResult);
+test.each(extensions)('gendiff', (ext) => {
+  const fileBefore = getFixturePath(`file1.${ext}`);
+  const fileAfter = getFixturePath(`file2.${ext}`);
+  expect(genDiff(fileBefore, fileAfter, 'stylish')).toBe(readFile('filesDiff.txt'));
+  expect(genDiff(fileBefore, fileAfter, 'plain')).toBe(readFile('filesPlainDiff.txt'));
+  expect(genDiff(fileBefore, fileAfter, 'json')).toBe(readFile('filesJsonDiff.txt'));
+  expect(genDiff(fileBefore, fileAfter)).toBe(readFile('filesDiff.txt'));
 });

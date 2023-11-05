@@ -9,6 +9,6 @@ export default (filepath, ext) => {
     case 'yml':
       return yaml.load(filepath);
     default:
-      return null;
+      throw new Error(`Invalid extension - ${ext}`);
   }
 };

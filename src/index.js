@@ -44,7 +44,7 @@ const createTree = (obj1, obj2) => {
   return newTree;
 };
 
-const genDiff = (filepath1, filepath2, formatName) => {
+const genDiff = (filepath1, filepath2, formatName = 'stylish') => {
   const tree = createTree(getData(filepath1), getData(filepath2));
   return format(tree, formatName);
 };
