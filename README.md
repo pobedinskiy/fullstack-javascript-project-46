@@ -16,7 +16,7 @@ To install the utility you need to
 - clone this repository
 - run the command "cd fullstack-javascript-project-46"
 - run the command "make install"
-- run the command "npm link
+- run the command "npm link"
 ## How to use
 То call the help, run the command "gendiff" with option "-h" / "--help" as shown below:
 ```
