@@ -15,8 +15,8 @@ const extensions = ['yml', 'json'];
 test.each(extensions)('gendiff', (ext) => {
   const fileBefore = getFixturePath(`file1.${ext}`);
   const fileAfter = getFixturePath(`file2.${ext}`);
-  expect(genDiff(fileBefore, fileAfter, 'stylish')).toBe(readFile('filesDiff.txt'));
-  expect(genDiff(fileBefore, fileAfter, 'plain')).toBe(readFile('filesPlainDiff.txt'));
-  expect(genDiff(fileBefore, fileAfter, 'json')).toBe(readFile('filesJsonDiff.txt'));
-  expect(genDiff(fileBefore, fileAfter)).toBe(readFile('filesDiff.txt'));
+  expect(genDiff(fileBefore, fileAfter, 'stylish')).toEqual(readFile('filesDiff.txt'));
+  expect(genDiff(fileBefore, fileAfter, 'plain')).toEqual(readFile('filesPlainDiff.txt'));
+  expect(genDiff(fileBefore, fileAfter, 'json')).toEqual(readFile('filesJsonDiff.txt'));
+  expect(genDiff(fileBefore, fileAfter)).toEqual(readFile('filesDiff.txt'));
 });

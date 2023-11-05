@@ -7,7 +7,7 @@ const transform = (data) => {
   if (data === null) {
     return null;
   }
-  if (_.isBoolean(data)) {
+  if ((_.isBoolean(data)) || (data === 0)) {
     return `${data}`;
   }
   return `'${data}'`;
