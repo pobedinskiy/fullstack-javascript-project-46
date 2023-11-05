@@ -9,7 +9,7 @@ It uses 3 output data formatters:
 - "stylish" (formatter by default) outputs the result as a tree structure in which the differences between these two files are marked with either "+" (when something has been added) or "-" (when something has been deleted);   
 - "plain" outputs the result as a set of lines describing the differences;
 - "json" outputs the result in json format, with property "name" containg information about the differences.
-###Main requirements
+### Main requirements
 Node.js v 20.2.0 or above
 ## Installation 
 To install the utility you need to
@@ -24,14 +24,14 @@ gendiff -h
 ```
 ### Example of calling the help:
 [![asciicast](https://asciinema.org/a/5WYmg8Lg4hb6wURHFOwsjlQWj.svg)](https://asciinema.org/a/5WYmg8Lg4hb6wURHFOwsjlQWj)
-## Examples of usage
-### example of using the command "gendiff" on two flat json files with the format by default ("stylish")  
-[![asciicast](https://asciinema.org/a/TAR4E4S1MEpO2YoJhkQgrwTfS.svg)](https://asciinema.org/a/TAR4E4S1MEpO2YoJhkQgrwTfS)
-### example of using the command "gendiff" on two flat yml files with the format by default ("stylish")  
+## Examples of using the "gendiff" command with different files and formats
+### two flat json files with the format by default ("stylish")  
+[![asciicast](https://asciinema.org/a/rUvFRLPWjcKjtIXnO5H6vPwEH.svg)](https://asciinema.org/a/rUvFRLPWjcKjtIXnO5H6vPwEH)
+### two flat yml files with the format by default ("stylish")  
 [![asciicast](https://asciinema.org/a/UL7CDdOKBBrSNYjfwpKnbYPTU.svg)](https://asciinema.org/a/UL7CDdOKBBrSNYjfwpKnbYPTU)
-### examples of using the command "gendiff" on two nested json files and two yml files with the format by default ("stylish") 
+### two nested json files and two yml files with the format by default ("stylish") 
 [![asciicast](https://asciinema.org/a/alWtfqYw5IPXFAFk3QUkbcxLF.svg)](https://asciinema.org/a/alWtfqYw5IPXFAFk3QUkbcxLF)
-### example of using the command "gendiff"on two nested json files with the format "plain"
+### two nested json files with the format "plain"
 [![asciicast](https://asciinema.org/a/dh8raDPswlOEtQRCkGrdkDVUm.svg)](https://asciinema.org/a/dh8raDPswlOEtQRCkGrdkDVUm)
-### example of using the command "gendiff" on two nested json files with the format "json"
+### two nested json files with the format "json"
 [![asciicast](https://asciinema.org/a/g1PaI9cNHBa0JQKzG2OMqNos0.svg)](https://asciinema.org/a/g1PaI9cNHBa0JQKzG2OMqNos0)
