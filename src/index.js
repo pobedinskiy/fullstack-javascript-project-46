@@ -16,7 +16,7 @@ const getData = (filepath) => {
 
 const createTree = (obj1, obj2) => {
   const uniqKeysList = _.uniq([..._.keys(obj1), ..._.keys(obj2)]);
-  const sortedKeysList = uniqKeysList.sort();
+  const sortedKeysList = _.sortBy(uniqKeysList);
   const newTree = sortedKeysList.map((key) => {
     if (_.isPlainObject(obj1[key]) && _.isPlainObject(obj2[key])) {
       const children = createTree(obj1[key], obj2[key]);
