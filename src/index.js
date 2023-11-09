@@ -17,7 +17,7 @@ const getData = (filepath) => {
 const createTree = (obj1, obj2) => {
   const uniqKeysList = _.uniq([..._.keys(obj1), ..._.keys(obj2)]);
   const sortedKeysList = _.sortBy(uniqKeysList);
-  const newTree = sortedKeysList.map((key) => {
+  const treePart = sortedKeysList.map((key) => {
     if (_.isPlainObject(obj1[key]) && _.isPlainObject(obj2[key])) {
       const children = createTree(obj1[key], obj2[key]);
       return {
@@ -41,7 +41,7 @@ const createTree = (obj1, obj2) => {
     }
     return { key, value: obj1[key], name: 'unchanged' };
   });
-  return newTree;
+  return treePart;
 };
 
 const genDiff = (filepath1, filepath2, formatName = 'stylish') => {
